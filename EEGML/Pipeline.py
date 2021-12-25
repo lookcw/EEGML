@@ -38,7 +38,6 @@ class Pipeline:
             deepcopy(previous_transformers))
         transformer.set_pipeline_name(self._pipeline_name)
 
-
     def add_filter_transformer(self, filter_transformer:FilterTransformer):
         self.set_transformer(filter_transformer,self._filter_transformers)
         self._filter_transformers.append(filter_transformer)
@@ -50,16 +49,6 @@ class Pipeline:
     def add_post_transformer(self, post_transformer:PostTransformer):
         self.set_transformer(post_transformer,self._filter_transformers+[self._extract_transformer])
         self._post_transformers.append(post_transformer)
-
-    def add_filter_transformers(self, filter_transformers:List[FilterTransformer]):
-        for transformer in filter_transformers:
-            transformer.set_config(self._config)
-        self._filter_transformers += filter_transformers
-
-    def add_post_transformers(self, post_transformers:List[PostTransformer]):
-        for transformer in post_transformers:
-            transformer.set_config(self._config)
-        self._post_transformers += post_transformers
 
     def add_validator(self, validator):
         self.validator = validator
@@ -73,7 +62,7 @@ class Pipeline:
     def create_pipeline_folder(self):
         create_pipeline_folder(self._pipeline_name)
 
-    def filter_transform(self, patient:Patient):    
+    def filter_transform(self, patient:Patient) -> Patient:    
         # only load
         for (i, filter_transformer) in enumerate(self._filter_transformers):
             if not filter_transformer.is_transformed_patient_file_exist(patient):
@@ -90,7 +79,7 @@ class Pipeline:
         print(patient)
         return patient
 
-    def get_featureset(self):
+    def get_featureset(self) -> FeatureSet:
         if not self._extract_transformer.is_featureset_exists():
             for (i, input_folder) in enumerate(self._config[INPUT_FOLDERS_KEY]):
                 if self._extract_transformer.should_write():
@@ -117,7 +106,7 @@ class Pipeline:
             featureset = self._extract_transformer.load_featureset()
         return featureset
 
-    def post_transform(self, featureset:FeatureSet):
+    def post_transform(self, featureset:FeatureSet) -> FeatureSet:
         # only load
         for (i, post_transformer) in enumerate(self._post_transformers):
             if not post_transformer.is_transformed_featureset_exists():
