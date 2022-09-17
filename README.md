@@ -3,7 +3,7 @@ EEGML is a library designed to make developing methods for EEG based machine lea
 
 ## Why I did this
 
-EEGML was inspired by my work at [Synapto](www.synapto.io). We spent four years trying to find a way to diagnose Alzheimer's using EEG signals and machine learning. While we unfortunately did not make much pgoress in the field, we did discover a lot about the engineering challenges behind testing several different methods of diagnoses quickly. We tried an exploding number of combinations of filtering methods, features, post processing methods, models, etc. We realized quickly that we were writing the same code over and over and over. We tried writing a centralized pipeline three times, and all three times they required a lot of changes every time we wanted to do something that we did not initially plan for. It was a harder design challenge than I thought. This project is meant to fix that. Lets get into it. 
+EEGML was inspired by my work at [Synapto](www.synapto.io). We spent four years trying to find a way to diagnose Alzheimer's using EEG signals and machine learning. While we unfortunately did not make much progress in the field, we did discover a lot about the engineering challenges behind testing several different methods of diagnoses quickly. We tried an exploding number of combinations of filtering methods, features, post processing methods, models, etc. We realized quickly that we were writing the same code over and over and over. We tried writing a centralized pipeline three times, and all three times they required a lot of changes every time we wanted to do something that we did not initially plan for. It was a harder design challenge than I thought. This project is meant to fix that. Lets get into it. 
 
 ## How it works
 
